@@ -1,0 +1,36 @@
+# Ruby
+*.gem
+*.rbc
+*.rvmrc
+*.ruby-version
+*.ruby-gemset
+log/*
+tmp/*
+vendor/bundle
+*.pid
+*.swp
+
+# Rails
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/public/assets
+/public/packs
+/.byebug_history
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.vscode/
+
+# Bundler
+.bundle/
+
+# Test directories
+test/tmp
+test/test_data
+
+# Coverage
+coverage/

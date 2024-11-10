@@ -1,14 +1,13 @@
 // .devcontainer/devcontainer.json
 {
-  "name": "Sinatra Project Dev Container",
+  "name": "conference-management",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "web", // The service name from docker-compose.yml that runs Sinatra
   "workspaceFolder": "/app", // This should match the mount path in docker-compose.yml
   "customizations": {
     "vscode": {
       "extensions": [
-        "rebornix.ruby", // Ruby language support
-        "castwide.solargraph", // Ruby code intelligence
+        "shopify.ruby-extensions-pack", // Ruby language support
         "ms-azuretools.vscode-docker" // Docker integration
       ],
       "settings": {
