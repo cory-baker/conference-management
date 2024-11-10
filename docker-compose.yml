@@ -1,0 +1,30 @@
+# specify the docker compose version
+version: '3.8'
+
+services:
+  # define the service (sinatra app)
+  web:
+    # build the docker imag eusing the dockerfile in the current directory
+    build: .
+    ports:
+      - "4567:4567" # host:container
+    volumes:
+      - .:/app # mount current directory to the /app directory in the container, enable live reload
+    working_dir: /app  # Optionally specify the working directory inside the container
+    depends_on:
+      - db # ensure the db service is started before the web service
+
+  db:
+    image: mysql:8.0 # use the official mysql image
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: conference
+      MYSQL_USER: user
+      MYSQL_PASSWORD:
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql # persist the data
+      
+volumes:
+  db_data:  # Define a named volume to persist MySQL data
