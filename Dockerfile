@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 4567
 
 # command to start the sinatra app
-CMD ["ruby", "app.rb", "-o", "0.0.0.0"]
+CMD sh -c "ruby db/schema.rb && ruby db/seeds.rb && bundle exec ruby app.rb -o 0.0.0.0"

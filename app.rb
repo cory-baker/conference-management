@@ -1,24 +1,9 @@
 require 'sinatra'
-require 'mysql2'
-
-client = Mysql2::Client.new(
-  host: 'localhost',
-  username: 'root',
-  password: 'root',
-  database: 'conference'
-)
-
-
+require_relative './db/schema'
+require_relative './db/seeds'
 set :bind, '0.0.0.0'
 
-get '/' do
-  erb :index
-end
-
-post '/register' do
-  name = params[:name]
-  email = params[:email]
-  phone = params[:phone]
-  client.query("INSERT INTO attendees (name, email, phone) VALUES ('#{name}', '#{email}', '#{phone}')")
-  erb :thanks
-end
+require_relative 'controllers/users'
+require_relative 'controllers/conferences'
+require_relative 'controllers/sessions'
+require_relative 'controllers/registrations'

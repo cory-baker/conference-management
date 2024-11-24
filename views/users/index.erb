@@ -1,0 +1,32 @@
+<h1>Users</h1>
+<a href="/users/new">Create New User</a>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user['id'] %></td>
+        <td><%= user['name'] %></td>
+        <td><%= user['email'] %></td>
+        <td><%= user['role'] %></td>
+        <td>
+          <a href="/users/<%= user['id'] %>">View</a> |
+          <a href="/users/<%= user['id'] %>/edit">Edit</a> |
+          <form action="/users/<%= user['id'] %>" method="POST" style="display:inline;">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
