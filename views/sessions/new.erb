@@ -1,0 +1,31 @@
+<h1 class="mb-4"><%= @title %></h1>
+
+<form action="/sessions" method="POST">
+  <div class="mb-3">
+    <label for="title" class="form-label">Session Title</label>
+    <input type="text" name="title" id="title" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="conference_id" class="form-label">Conference ID</label>
+    <input type="number" name="conference_id" id="conference_id" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="start_time" class="form-label">Start Time</label>
+    <input type="datetime-local" name="start_time" id="start_time" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="end_time" class="form-label">End Time</label>
+    <input type="datetime-local" name="end_time" id="end_time" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea name="description" id="description" rows="4" class="form-control" required></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Create Session</button>
+  <a href="/sessions" class="btn btn-secondary">Cancel</a>
+</form>
