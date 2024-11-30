@@ -1,0 +1,34 @@
+<h1 class="mb-4">Edit Conference</h1>
+
+<form action="/conferences/<%= @conference['id'] %>" method="POST" class="needs-validation">
+  <!-- Add hidden method override for POST to act as PUT -->
+  <input type="hidden" name="_method" value="POST">
+
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" id="title" name="title" class="form-control" value="<%= @conference['title'] %>" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea id="description" name="description" class="form-control" rows="4" required><%= @conference['description'] %></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="start_date" class="form-label">Start Date</label>
+    <input type="datetime-local" id="start_date" name="start_date" class="form-control" value="<%= @conference['start_date'].strftime('%Y-%m-%dT%H:%M') %>" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="end_date" class="form-label">End Date</label>
+    <input type="datetime-local" id="end_date" name="end_date" class="form-control" value="<%= @conference['end_date'].strftime('%Y-%m-%dT%H:%M') %>" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="location" class="form-label">Location</label>
+    <input type="text" id="location" name="location" class="form-control" value="<%= @conference['location'] %>" required>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save Changes</button>
+  <a href="/conferences/<%= @conference['id'] %>" class="btn btn-secondary">Cancel</a>
+</form>

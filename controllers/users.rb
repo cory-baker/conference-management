@@ -2,17 +2,24 @@ require 'sinatra'
 require_relative '../db/config'
 
 get '/users' do
+  @title = "Users"
   @users = db_client.query("SELECT * FROM `user`").to_a
-  erb :'users/index'
-end
-
-get '/users/:id' do
-  @user = db_client.query("SELECT * FROM `user` WHERE id=#{params[:id]}").first
-  erb :'users/show'
+  puts "DEBUG: @title = #{@title}"
+  erb :'users/index', layout: true
 end
 
 get '/users/new' do
-  erb :'users/form'
+  @title = "New User"
+  erb :'users/new'
+end
+
+get '/users/:id' do
+  if params[:id] =~ /^\d+$/
+    @user = db_client.query("SELECT * FROM `user` WHERE id=#{params[:id]}").first
+    erb :'users/edit'
+  else
+    halt 404, "User not found"
+  end
 end
 
 post '/users' do
@@ -21,11 +28,6 @@ post '/users' do
   role = params[:role]
   db_client.query("INSERT INTO `user` (name, email, role) VALUES ('#{name}', '#{email}', '#{role}')")
   redirect '/users'
-end
-
-get '/users/:id/edit' do
-  @user = db_client.query("SELECT * FROM `user` WHERE id=#{params[:id]}").first
-  erb :'users/form'
 end
 
 put '/users/:id' do

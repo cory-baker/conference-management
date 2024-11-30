@@ -32,7 +32,6 @@ seed_statements = [
   SQL
 ]
 
-# Execute each SQL statement
 seed_statements.each do |sql|
   begin
     db_client.query(sql)

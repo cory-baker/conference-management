@@ -1,0 +1,30 @@
+<div class="container mt-4">
+<h1>Create New Registration</h1>
+
+<!-- Form to create a registration -->
+<form action="/registrations" method="POST">
+  <div class="form-group">
+    <label for="user_id">User</label>
+    <select name="user_id" id="user_id" class="form-control" required>
+      <option value="">Select a User</option>
+      <% @users.each do |user| %>
+        <option value="<%= user[:id] %>"><%= user[:name] %> (<%= user[:email] %>)</option>
+      <% end %>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="conference_id">Conference</label>
+    <select name="conference_id" id="conference_id" class="form-control" required>
+      <option value="">Select a Conference</option>
+      <% @conferences.each do |conference| %>
+        <option value="<%= conference[:id] %>"><%= conference[:title] %> - <%= conference[:location] %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Create Registration</button>
+</form>
+
+<a href="/registrations" class="btn btn-secondary mt-3">Back to Registrations</a>
+</div>

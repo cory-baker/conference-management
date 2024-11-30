@@ -1,0 +1,46 @@
+<h1 class="mb-4">Edit Session</h1>
+
+<form action="/sessions/<%= @session['id'] %>" method="POST" class="needs-validation">
+  <!-- Hidden method override for PUT -->
+  <input type="hidden" name="_method" value="POST">
+
+  <!-- Title -->
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" id="title" name="title" class="form-control" value="<%= @session['title'] %>" required>
+  </div>
+
+  <!-- Conference -->
+  <div class="mb-3">
+    <label for="conference_id" class="form-label">Conference</label>
+    <select id="conference_id" name="conference_id" class="form-select" required>
+      <% @conferences.each do |conference| %>
+        <option value="<%= conference['id'] %>" <%= 'selected' if conference['id'] == @session['conference_id'] %>>
+          <%= conference['title'] %>
+        </option>
+      <% end %>
+    </select>
+  </div>
+
+  <!-- Start Time -->
+  <div class="mb-3">
+    <label for="start_time" class="form-label">Start Time</label>
+    <input type="datetime-local" id="start_time" name="start_time" class="form-control" value="<%= @session['start_time'].strftime('%Y-%m-%dT%H:%M') %>" required>
+  </div>
+
+  <!-- End Time -->
+  <div class="mb-3">
+    <label for="end_time" class="form-label">End Time</label>
+    <input type="datetime-local" id="end_time" name="end_time" class="form-control" value="<%= @session['end_time'].strftime('%Y-%m-%dT%H:%M') %>" required>
+  </div>
+
+  <!-- Description -->
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea id="description" name="description" class="form-control" rows="4" required><%= @session['description'] %></textarea>
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-primary">Update Session</button>
+  <a href="/sessions/<%= @session['id'] %>" class="btn btn-secondary">Cancel</a>
+</form>

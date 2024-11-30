@@ -52,7 +52,6 @@ sql_statements = [
   SQL
 ]
 
-# Execute each SQL statement
 sql_statements.each do |sql|
   begin
     db_client.query(sql)

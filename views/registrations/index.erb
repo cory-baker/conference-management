@@ -1,0 +1,23 @@
+<div class="container mt-4">
+    <h1 class="mb-4">Registrations</h1>
+
+    <!-- Create Button -->
+    <a href="/registrations/new" class="btn btn-primary mb-4">Create Registration</a>
+
+    <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>User Name</th>
+          <th>Conference Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @registrations.each do |registration| %>
+          <tr>
+            <td><%= registration[:user_name] %></td>
+            <td><%= registration[:conference_title] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>

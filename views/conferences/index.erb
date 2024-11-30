@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Conferences</h1>
+  <a href="/conferences/new" class="btn btn-primary mb-3">Create New Conference</a>
+
+  <% if @conferences.empty? %>
+    <p class="alert alert-info">No conferences found.</p>
+  <% else %>
+    <table class="table table-striped table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Location</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @conferences.each do |conference| %>
+          <tr>
+            <td><%= conference['id'] %></td>
+            <td><%= conference['title'] %></td>
+            <td><%= conference['description'] %></td>
+            <td><%= conference['start_date'].strftime("%Y-%m-%d<br>%I:%M %p") %></td>
+            <td><%= conference['end_date'].strftime("%Y-%m-%d<br>%I:%M %p") %></td>
+            <td><%= conference['location'] %></td>
+            <td>
+              <a href="/conferences/<%= conference['id'] %>" class="btn btn-sm btn-info">View</a>
+              <a href="/conferences/<%= conference['id'] %>" class="btn btn-sm btn-warning">Edit</a>
+              <form action="/conferences/<%= conference['id'] %>" method="POST" style="display:inline;">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this conference?')">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
