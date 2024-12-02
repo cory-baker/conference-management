@@ -1,5 +1,5 @@
 require_relative './config.rb'
-puts db_client
+
 sql_statements = [
   <<~SQL,
     CREATE TABLE IF NOT EXISTS `conference` (
@@ -18,7 +18,7 @@ sql_statements = [
       `id` int NOT NULL AUTO_INCREMENT,
       `name` varchar(100) NOT NULL,
       `email` varchar(100) NOT NULL,
-      `role` enum('admin','attendee','speaker') NOT NULL,
+      `role` enum('attendee','speaker') NOT NULL,
       `registered_at` datetime,
       PRIMARY KEY (`id`),
       UNIQUE (`email`)
@@ -45,9 +45,12 @@ sql_statements = [
       `start_time` datetime NOT NULL,
       `end_time` datetime NOT NULL,
       `description` text,
+      `speaker_id` int DEFAULT NULL,
       PRIMARY KEY (`id`),
       KEY `conference_id` (`conference_id`),
-      CONSTRAINT `session_conference_fk` FOREIGN KEY (`conference_id`) REFERENCES `conference` (`id`) ON DELETE CASCADE
+      KEY `speaker_id` (`speaker_id`),
+      CONSTRAINT `session_conference_fk` FOREIGN KEY (`conference_id`) REFERENCES `conference` (`id`) ON DELETE CASCADE,
+      CONSTRAINT `session_speaker_fk` FOREIGN KEY (`speaker_id`) REFERENCES `user` (`id`) ON DELETE SET NULL
     );
   SQL
 ]

@@ -14,6 +14,7 @@ get '/users/new' do
 end
 
 get '/users/:id' do
+  @title = "Edit User"
   if params[:id] =~ /^\d+$/
     @user = db_client.query("SELECT * FROM `user` WHERE id=#{params[:id]}").first
     erb :'users/edit'

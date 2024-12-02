@@ -1,5 +1,6 @@
 
 get '/registrations' do
+  @title = "Registrations"
   @registrations = db_client.query('
     SELECT r.user_id, r.conference_id, u.name AS user_name, c.title AS conference_title
     FROM registration r
@@ -18,6 +19,7 @@ get '/registrations' do
 end
 
 get '/registrations/new' do
+  @title = "New Registration"
   @users =  db_client.query('SELECT id, name, email FROM user').map do |row|
     { id: row['id'], name: row['name'], email: row['email'] }
   end

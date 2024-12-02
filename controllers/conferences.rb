@@ -1,14 +1,17 @@
 
 get '/conferences' do
+  @title = "Conferences"
   @conferences = db_client.query("SELECT * FROM `conference`").to_a
   erb :'conferences/index'
 end
 
 get '/conferences/new' do
+  @title = "New Conference"
   erb :'conferences/new'
 end
 
 get '/conferences/:id' do
+  @title = "Conference Details"
   @conference = db_client.query("SELECT * FROM `conference` WHERE id=#{params[:id]}").first
   @users = db_client.query("SELECT u.* FROM `user` u JOIN `registration` r ON u.id = r.user_id WHERE r.conference_id=#{params[:id]}").to_a
   @sessions = db_client.query("SELECT * FROM `session` WHERE conference_id=#{params[:id]}").to_a
@@ -26,6 +29,7 @@ post '/conferences' do
 end
 
 get '/conferences/:id/edit' do
+  @title = "Edit Conference"
   @conference = db_client.query("SELECT * FROM `conference` WHERE id=#{params[:id]}").first
 
   if @conference.nil?
